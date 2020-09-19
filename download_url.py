@@ -26,12 +26,12 @@ def parse_page_content(content):
 
 def save_urls_to_file(url_list, dst):
     # Saves the video urls to file
-    with open(dst, 'a+') as f:
+    with open(dst, 'w') as f:
         for url in url_list:
             f.write(url)
             f.write('\n')
 
-def download_url(category, start_page, end_page):
+def download_video_url(category, start_page, end_page):
     # Integrates all the sub processes above
     base_dir = 'F:\\Downloads\\ScrapedUrls\\'
     base_url = 'http://rule34.paheal.net/'
@@ -39,5 +39,8 @@ def download_url(category, start_page, end_page):
     for i in range(start_page, end_page):
         full_url = base_url + category + '/' + i
         full_path = base_dir + category + '_' + i + '.txt'
-        save_urls_to_file(parse_page_content(acquire_page_content(full_url)), full_path)
+        page_content = acquire_page_content(full_url)
+        # Page content acquisition failed
+        #if page_content 
+        save_urls_to_file(parse_page_content(page_content), full_path)
         time.sleep(8)

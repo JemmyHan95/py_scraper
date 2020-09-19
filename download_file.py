@@ -26,3 +26,17 @@ def download_from_url(url, dst):
     pbar.close()
 
     return file_size
+
+def download_video(category, start_page, end_page):
+    video_save_path = 'F:\\CG Pornography\\' + category + '\\Videos'
+    video_url_path = 'F:\\Downloads\\ScrapedUrls\\'
+
+    for i in range(start_page, end_page):
+        full_url_path = video_url_path + category + '_' + str(i) + '.txt'
+        if os.path.exists(full_url_path):
+            with open(full_url_path, 'r') as f:
+                for line in f.readlines():
+                    line = line.strip()
+                    print(line)
+        else:
+            print(full_url_path + ' does not exists!')

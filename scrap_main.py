@@ -1,7 +1,13 @@
-from download_url import download_video_urls
+from download_url import download_video_url
+from download_file import download_video
 
 def main():
-    # download_video_urls('http://rule34.paheal.net/post/list/Nier_Automata/4')
+    category = 'Elena_Fisher'
+    start = 1
+    end = 5
+    #download_video_url(category, start, end)
+    download_video(category, start, end)
+
 
 if __name__ == '__main__':
     main()
