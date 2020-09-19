@@ -30,13 +30,26 @@ def download_from_url(url, dst):
 def download_video(category, start_page, end_page):
     video_save_path = 'F:\\CG Pornography\\' + category + '\\Videos'
     video_url_path = 'F:\\Downloads\\ScrapedUrls\\'
+    downloaded_file_code = []
+
+    for elem in os.walk(video_save_path):
+        for  filename in elem[2]:
+            downloaded_file_code.append(filename[0:7])
 
     for i in range(start_page, end_page):
         full_url_path = video_url_path + category + '_' + str(i) + '.txt'
         if os.path.exists(full_url_path):
+            print('Start downloading ' + category + ' page ' + str(i))
             with open(full_url_path, 'r') as f:
                 for line in f.readlines():
                     line = line.strip()
-                    print(line)
+                    video_file_name = line[line.rfind('/') + 1 : len(line)].replace('%20', '_')
+                    video_code = video_file_name[0:7]
+                    if video_code in downloaded_file_code:
+                        print(video_file_name + ' already downloaded')
+                        continue
+                    else:
+                        video_full_path = video_save_path + video_file_name
+                        download_from_url(line, video_full_path)
         else:
             print(full_url_path + ' does not exists!')
