@@ -32,6 +32,9 @@ def download_video(category, start_page, end_page):
     video_url_path = 'F:\\Downloads\\ScrapedUrls\\'
     downloaded_file_code = []
 
+    if not os.path.exists(video_save_path):
+        os.mkdir(video_save_path)
+
     for elem in os.walk(video_save_path):
         for  filename in elem[2]:
             downloaded_file_code.append(filename[0:7])
